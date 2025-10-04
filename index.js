@@ -14,7 +14,7 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cors());
 app.use('/', express.static(path.join(__dirname, 'source')));
-app.use('/src', express.static(path.join(__dirname, 'src')));
+app.use('/pages', express.static(path.join(__dirname, 'pages')));
 
 const settingsPath = path.join(__dirname, './src/settings.json');
 const settings = JSON.parse(fs.readFileSync(settingsPath, 'utf-8'));
@@ -37,7 +37,7 @@ app.use((req, res, next) => {
 
 // Api Route
 let totalRoutes = 0;
-const apiFolder = path.join(__dirname, './src/api');
+const apiFolder = path.join(__dirname, './pages/api');
 fs.readdirSync(apiFolder).forEach((subfolder) => {
     const subfolderPath = path.join(apiFolder, subfolder);
     if (fs.statSync(subfolderPath).isDirectory()) {
